@@ -103,7 +103,6 @@ while (sum(glb_mask ~= 0))
     fprintf('EnumKOCG progres ... Counter: %d   Remaining vertexes: %d / %d \n', counter, sum(glb_mask), NV);
     
     % init X_loc
-    fprintf('IOCG\n');
     X_loc = IOCG(B(glb_mask, glb_mask), NG); % index of X_loc is local
     
     % check validity
@@ -112,14 +111,12 @@ while (sum(glb_mask ~= 0))
     end
     
     % find optimal X_loc
-    fprintf('FOCGCoreOuter\n');				    
     [X_loc, FX_Val_log] = FOCGCoreOuter(A(glb_mask, glb_mask), H(glb_mask, glb_mask), X_loc, U, NG);
     
     % clean X_loc
     X_loc(X_loc < 1e-7) = 0;    
     
     % transform X_loc to X_glb
-    fprintf('loc2glbX\n');				        
     X_glb = loc2glbX(X_loc, glb_mask);
     
     % log X_glb
