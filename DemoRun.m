@@ -12,7 +12,7 @@ clear;
 % load DemoData.mat
 load('./DATA/slashdot.mat');
 
-NG = 10;
+NG = 2;
 alpha = 0.9;
 beta = 50;
 % Run enumKOCG.m
