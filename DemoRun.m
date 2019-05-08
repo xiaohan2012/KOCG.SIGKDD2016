@@ -9,15 +9,21 @@
 % clear env
 clear;
 
-% load DemoData.mat
-load('./DATA/slashdot.mat');
-
-NG = 2;
+NG = 10;
 alpha = 0.9;
 beta = 50;
-% Run enumKOCG.m
-cd KOCG
-[X_enumKOCG_cell, time] = enumKOCG(A, B, NG, alpha, beta)
-cd ..
 
-save('./output/slashdot.mat', 'X_enumKOCG_cell', 'time')
+graph_names = ["slashdot", "epinions", "wikiconflict", "bitcoin", "word"]
+
+for i = 1:length(graph_names)
+  graph_name = graph_names(i);
+  input_path = strcat('./DATA/', graph_name,'.mat');
+  load(input_path);
+
+  cd KOCG
+  [X_enumKOCG_cell, time] = enumKOCG(A, B, NG, alpha, beta)
+  cd ..
+  save(strcat('./output/', graph_name, '.mat'), 'X_enumKOCG_cell', 'time')  
+end
+
+
